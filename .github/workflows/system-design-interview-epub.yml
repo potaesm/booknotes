@@ -1,0 +1,35 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  generate-epub:
+    name: Create ePub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create ePub
+        uses: harrymaynard/markdown-to-epub-action@main
+        with:
+          markdownFiles: |-
+            system-design/system-design-interview/chapter*/README.md
+          title: "System Design Interview - An Insider's Guide"
+          author: Alex Xu
+          publisher: Kindle
+          cover: system-design/system-design-interview/cover.jpg
+          version: 1
+          lang: en
+          tocTitle: Table of Contents
+          hideToC: false
+          output: system-design-interview.epub
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: system-design-interview.epub
+          asset_name: system-design-interview.epub
+          asset_content_type: application/epub+zip
