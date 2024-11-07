@@ -17,10 +17,10 @@ jobs:
           title: "System Design Interview - An Insider's Guide"
           author: Alex Xu
           publisher: Kindle
-          cover: "system-design/system-design-interview/cover.jpg"
+          # cover: "system-design/system-design-interview/cover.jpg"
           version: 1
           lang: en
-          tocTitle: Table of Contents
+          tocTitle: "Table of Contents"
           hideToC: false
           output: "system-design-interview.epub"
       - name: Upload Release Asset
